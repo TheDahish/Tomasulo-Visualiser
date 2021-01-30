@@ -12,9 +12,7 @@ import "semantic-ui-css/semantic.min.css";
 
 import {
   Button,
-  Card,
   Container,
-  Divider,
   Grid,
   Header,
   Icon,
@@ -228,10 +226,6 @@ function App() {
       </>
     );
   }
-  function addInstruction(i) {
-    instructions.push(i);
-    setInstructions([...instructions]);
-  }
 
   function nextCycle() {
     if (!disable) {
@@ -254,10 +248,13 @@ function App() {
         for (let j = 0; j < instructions.length; j++) {
           if (
             instructions[j].station === element.name &&
-            instructions[j].executionComplete.start == 0
+            instructions[j].executionComplete.start === 0
           ) {
+            console.log(instructions);
             instructions[j].toBeExecuted = true;
-            instructions[j].executionComplete.start = cycleNumber;
+            const temp = cycleNumber;
+            instructions[j].executionComplete = { start: temp, end: 0 };
+            console.log(instructions);
             break;
           }
         }
@@ -281,10 +278,12 @@ function App() {
         for (let j = 0; j < instructions.length; j++) {
           if (
             instructions[j].station === element.name &&
-            instructions[j].executionComplete.start == 0
+            instructions[j].executionComplete.start === 0
           ) {
             instructions[j].toBeExecuted = true;
-            instructions[j].executionComplete.start = cycleNumber;
+            const temp = cycleNumber;
+            instructions[j].executionComplete = { start: temp, end: 0 };
+
             break;
           }
         }
@@ -298,11 +297,11 @@ function App() {
         for (let j = 0; j < instructions.length; j++) {
           if (
             instructions[j].station === element.name &&
-            instructions[j].executionComplete.start == 0
+            instructions[j].executionComplete.start === 0
           ) {
             instructions[j].toBeExecuted = true;
-            instructions[j].executionComplete.start = cycleNumber;
-            break;
+            const temp = cycleNumber;
+            instructions[j].executionComplete = { start: temp, end: 0 };
           }
         }
       }
@@ -315,6 +314,8 @@ function App() {
           let tag = "";
           let value = 0;
           switch (element.op) {
+            default:
+              break;
             case "ADD.D":
               {
                 tag = element.name;
@@ -350,6 +351,8 @@ function App() {
           let tag = "";
           let value = 0;
           switch (element.op) {
+            default:
+              break;
             case "MUL.D":
               {
                 tag = element.name;
@@ -402,6 +405,7 @@ function App() {
         element.toBeExecuted &&
         element.executionComplete.start == 0
       ) {
+        console.log(instructions[index]);
         instructions[index].executionComplete.start = cycleNumber;
       }
       if (
@@ -411,6 +415,8 @@ function App() {
         element.executionComplete.end == 0
       ) {
         switch (element.opcode) {
+          default:
+            break;
           case "L.D":
             {
               if (cycleNumber - element.executionComplete.start == 1) {
@@ -465,6 +471,8 @@ function App() {
 
         let value = 0;
         switch (element.opcode) {
+          default:
+            break;
           case "L.D": {
             let station;
             let memval;
@@ -615,9 +623,10 @@ function App() {
             instructions[currentInstruction].toBeExecuted = true;
           }
         }
-        break;
+        return;
       }
     }
+    currentInstruction = currentInstruction - 1;
   }
   function checkAdd(nextInstruction) {
     for (let index = 0; index < addResStation.length; index++) {
@@ -657,9 +666,10 @@ function App() {
             instructions[currentInstruction].toBeExecuted = true;
           }
         }
-        break;
+        return;
       }
     }
+    currentInstruction = currentInstruction - 1;
   }
   function checkStore(nextInstruction) {
     for (let index = 0; index < storeBuffer.length; index++) {
@@ -683,9 +693,10 @@ function App() {
             }
           }
         }
-        break;
+        return;
       }
     }
+    currentInstruction = currentInstruction - 1;
   }
   function checkLoad(nextInstruction) {
     for (let index = 0; index < loadBuffer.length; index++) {
@@ -709,9 +720,10 @@ function App() {
           parseInt(Register[nextInstruction.k]) + parseInt(nextInstruction.j);
         setLoadbuffer([...loadBuffer]);
 
-        break;
+        return;
       }
     }
+    currentInstruction = currentInstruction - 1;
   }
 
   return (
