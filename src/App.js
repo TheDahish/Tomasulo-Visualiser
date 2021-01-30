@@ -729,6 +729,19 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar">
+        <div
+          style={{
+            border: "1px solid",
+            color: "#ac3714",
+            display: "flex",
+            justifyContent: "space-between",
+            width: "392px",
+          }}
+        >
+          <h6>ADD.D/SUB.D : 3 Cycles</h6>
+          <h6>S.D/L.D : 2 Cycles</h6>
+          <h6>MUL.D: 10 Cycles </h6> <h6>DIV.D: 20 Cycles</h6>
+        </div>
         <h1 style={{ marginTop: 20, fontFamily: "cursive" }}>
           TOMASULO ARCHITECTURE VIUALISER
         </h1>
