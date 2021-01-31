@@ -406,7 +406,8 @@ function App() {
         element.executionComplete.start == 0
       ) {
         console.log(instructions[index]);
-        instructions[index].executionComplete.start = cycleNumber;
+        const temp = cycleNumber;
+        instructions[index].executionComplete = { start: temp, end: 0 };
       }
       if (
         element.issue != 0 &&
