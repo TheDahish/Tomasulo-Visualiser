@@ -147,7 +147,7 @@ function App() {
       qj: "",
       qk: "",
       a: "",
-      timer: 2,
+      timer: 3,
       startTime: false,
     },
     {
@@ -159,7 +159,7 @@ function App() {
       qj: "",
       qk: "",
       a: "",
-      timer: 2,
+      timer: 3,
       startTime: false,
     },
     {
@@ -434,7 +434,7 @@ function App() {
             break;
           case "ADD.D":
             {
-              if (cycleNumber - element.executionComplete.start == 1) {
+              if (cycleNumber - element.executionComplete.start == 2) {
                 instructions[index].executionComplete.end = cycleNumber;
               }
             }
@@ -448,7 +448,7 @@ function App() {
             break;
           case "SUB.D":
             {
-              if (cycleNumber - element.executionComplete.start == 1) {
+              if (cycleNumber - element.executionComplete.start == 2) {
                 instructions[index].executionComplete.end = cycleNumber;
               }
             }
