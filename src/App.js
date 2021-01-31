@@ -35,7 +35,18 @@ function App() {
     R8: 8,
     R9: 9,
   };
-  const Memory = [100, 189, 8494, 84, 5, 56, 478, 63, 614, 447];
+  const [Memory, setMemory] = useState([
+    100,
+    189,
+    8494,
+    84,
+    5,
+    56,
+    478,
+    63,
+    614,
+    447,
+  ]);
   const [cycleNumber, setCycleNumber] = useState(1);
   const [instructions, setInstructions] = useState([]);
   const [disable, setDisable] = useState(false);
